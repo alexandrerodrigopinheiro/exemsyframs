@@ -11,21 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('points', function (Blueprint $table) {
+        Schema::create('equipments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('franchise_id')->constrained('franchises', 'id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignUuid('business_operation_id')->constrained('business_operations', 'id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignUuid('operations_manager_id')->constrained('operations_managers', 'id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignUuid('region_id')->constrained('regions', 'id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignUuid('point_id')->constrained('points', 'id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignUuid('software_id')->constrained('softwares', 'id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('name');
-            $table->string('identity')->nullable();
-            $table->string('addres')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->float('denomination', 10)->default(0.1);
+            $table->float('house_edge', 10)->default(0.0);
             $table->text('observation')->nullable();
             $table->boolean('enabled')->default(true);
-            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('points');
+        Schema::dropIfExists('equipments');
     }
 };

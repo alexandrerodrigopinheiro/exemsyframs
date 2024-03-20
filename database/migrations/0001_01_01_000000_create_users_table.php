@@ -16,15 +16,16 @@ return new class extends Migration
         Schema::create('office_staffs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('address')->nullable();
+            $table->string('identity')->nullable();
+            $table->string('addres')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->json('access_level')->nullable();
-            $table->rememberToken();
             $table->text('observation')->nullable();
             $table->boolean('enabled')->default(true);
+            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });

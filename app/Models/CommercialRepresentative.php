@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Partner extends Model
+class CommercialRepresentative extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
     protected $softDelete = true;
 
     protected $fillable = [
-        'franchise_id',
+        'name',
         'identity',
         'address',
         'phone',
@@ -34,7 +34,6 @@ class Partner extends Model
     ];
 
     protected $casts = [
-        'franchise_id' => 'string',
         'name' => 'string',
         'identity' => 'string',
         'address' => 'string',
@@ -51,8 +50,8 @@ class Partner extends Model
     /**
      * Relationships
      */
-    public function franchise(): BelongsTo
+    public function franchises(): BelongsToMany
     {
-        return $this->belongsTo(Franchise::class)->withTrashed();
+        return $this->belongsToMany(Franchise::class)->withTrashed();
     }
 }

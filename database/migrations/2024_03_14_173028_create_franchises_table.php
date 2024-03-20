@@ -12,7 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('franchises', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('commercial_representative_id')->nullable()->constrained('commercial_representatives', 'id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('code', 4);
+            $table->string('name');
+            $table->string('identity')->nullable();
+            $table->string('addres')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email');
+            $table->boolean('service_terms')->default(true);
+            $table->string('observation')->nullable();
+            $table->boolean('enabled')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
