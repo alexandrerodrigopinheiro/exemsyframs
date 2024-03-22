@@ -24,7 +24,7 @@ class EquipmentReadingService
         return $data;
     }
 
-    public function recover(mixed $id)
+    public function recover(mixed $id): string|array
     {
         $data = [];
 
@@ -38,7 +38,7 @@ class EquipmentReadingService
         return $data;
     }
 
-    public function create()
+    public function create(): string|array
     {
         $data = [];
 
@@ -52,7 +52,7 @@ class EquipmentReadingService
         return $data;
     }
 
-    public function store(Request $request)
+    public function store(Request $request): string|array
     {
         $data = [];
 
@@ -66,7 +66,7 @@ class EquipmentReadingService
         return $data;
     }
 
-    public function show(mixed $id)
+    public function show(mixed $id): string|array
     {
         $data = [];
 
@@ -80,7 +80,7 @@ class EquipmentReadingService
         return $data;
     }
 
-    public function edit(mixed $id)
+    public function edit(mixed $id): string|array
     {
         $data = [];
 
@@ -94,7 +94,7 @@ class EquipmentReadingService
         return $data;
     }
 
-    public function update(Request $request, mixed $id)
+    public function update(Request $request, mixed $id): string|array
     {
         $data = [];
 
@@ -108,7 +108,7 @@ class EquipmentReadingService
         return $data;
     }
 
-    public function destroy(mixed $id)
+    public function destroy(mixed $id): string|array
     {
         $data = [];
 

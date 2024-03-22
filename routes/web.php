@@ -1,5 +1,22 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BusinessOperationController;
+use App\Http\Controllers\BusinessOperationStaffController;
+use App\Http\Controllers\CommercialRepresentativeController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DebtCollectorController;
+use App\Http\Controllers\DynamicController;
+use App\Http\Controllers\FranchiseController;
+use App\Http\Controllers\FranchiseStaffController;
+use App\Http\Controllers\OfficeStaffController;
+use App\Http\Controllers\OperationsManagerController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PointController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegionController;
+use App\Http\Controllers\ServiceTermsController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)
@@ -49,41 +66,40 @@ Route::controller(DashboardController::class)
     ->group(
         function () {
             Route::get('', 'index')->name('dashboards.index');
-            Route::post('update', 'update')->name('dashboards.update');
         }
     );
 
-Route::controller(FinancialController::class)
-    ->middleware([
-        'access.level',
-        'server.manager',
-    ])
-    ->prefix('financials')
-    ->group(
-        function () {
-            Route::get('', 'index')->name('financials.index');
-            Route::get('pdf', 'pdf')->name('financials.pdf');
-            Route::get('print', 'print')->name('financials.print');
-            Route::get('operations', 'operations')->name('financials.operations');
-            Route::get('operations_managers', 'operations_managers')->name('financials.operations_managers');
-            Route::get('regions', 'regions')->name('financials.regions');
-            Route::get('sale-points', 'sale_points')->name('financials.sale_points');
-        }
-    );
+// Route::controller(FinancialController::class)
+//     ->middleware([
+//         'access.level',
+//         'server.manager',
+//     ])
+//     ->prefix('financials')
+//     ->group(
+//         function () {
+//             Route::get('', 'index')->name('financials.index');
+//             Route::get('pdf', 'pdf')->name('financials.pdf');
+//             Route::get('print', 'print')->name('financials.print');
+//             Route::get('operations', 'operations')->name('financials.operations');
+//             Route::get('operations_managers', 'operations_managers')->name('financials.operations_managers');
+//             Route::get('regions', 'regions')->name('financials.regions');
+//             Route::get('sale-points', 'sale_points')->name('financials.sale_points');
+//         }
+//     );
 
-Route::controller(ResultController::class)
-    ->middleware([
-        'access.level',
-        'server.manager',
-    ])
-    ->prefix('results')
-    ->group(
-        function () {
-            Route::get('', 'index')->name('results.index');
-            Route::get('create', 'create')->name('results.create');
-            Route::post('store', 'store')->name('results.store');
-        }
-    );
+// Route::controller(ResultController::class)
+//     ->middleware([
+//         'access.level',
+//         'server.manager',
+//     ])
+//     ->prefix('results')
+//     ->group(
+//         function () {
+//             Route::get('', 'index')->name('results.index');
+//             Route::get('create', 'create')->name('results.create');
+//             Route::post('store', 'store')->name('results.store');
+//         }
+//     );
 
 Route::controller(FranchiseController::class)
     ->middleware([
@@ -257,7 +273,7 @@ Route::controller(RegionController::class)
         }
     );
 
-Route::controller(SalePointController::class)
+Route::controller(PointController::class)
     ->middleware([
         'access.level',
         'server.manager',
@@ -274,66 +290,6 @@ Route::controller(SalePointController::class)
             Route::get('edit/{id}', 'edit')->name('sale_points.edit');
             Route::post('update', 'update')->name('sale_points.update');
             Route::post('destroy/{id}', 'destroy')->name('sale_points.destroy');
-        }
-    );
-
-Route::controller(AffiliateController::class)
-    ->middleware([
-        'access.level',
-        'server.manager',
-    ])
-    ->prefix('affiliates')
-    ->group(
-        function () {
-            Route::get('', 'index')->name('affiliates.index');
-            Route::get('trash', 'trash')->name('affiliates.trash');
-            Route::post('recover/{id}', 'recover')->name('affiliates.recover');
-            Route::get('create', 'create')->name('affiliates.create');
-            Route::post('store', 'store')->name('affiliates.store');
-            Route::get('show/{id}', 'show')->name('affiliates.show');
-            Route::get('edit/{id}', 'edit')->name('affiliates.edit');
-            Route::post('update', 'update')->name('affiliates.update');
-            Route::post('destroy/{id}', 'destroy')->name('affiliates.destroy');
-        }
-    );
-
-Route::controller(KioskController::class)
-    ->middleware([
-        'access.level',
-        'server.manager',
-    ])
-    ->prefix('kiosks')
-    ->group(
-        function () {
-            Route::get('', 'index')->name('kiosks.index');
-            Route::get('trash', 'trash')->name('kiosks.trash');
-            Route::post('recover/{id}', 'recover')->name('kiosks.recover');
-            Route::get('create', 'create')->name('kiosks.create');
-            Route::post('store', 'store')->name('kiosks.store');
-            Route::get('show/{id}', 'show')->name('kiosks.show');
-            Route::get('edit/{id}', 'edit')->name('kiosks.edit');
-            Route::post('update', 'update')->name('kiosks.update');
-            Route::post('destroy/{id}', 'destroy')->name('kiosks.destroy');
-        }
-    );
-
-Route::controller(PlayerController::class)
-    ->middleware([
-        'access.level',
-        'server.manager',
-    ])
-    ->prefix('players')
-    ->group(
-        function () {
-            Route::get('', 'index')->name('players.index');
-            Route::get('trash', 'trash')->name('players.trash');
-            Route::post('recover/{id}', 'recover')->name('players.recover');
-            Route::get('create', 'create')->name('players.create');
-            Route::post('store', 'store')->name('players.store');
-            Route::get('show/{id}', 'show')->name('players.show');
-            Route::get('edit/{id}', 'edit')->name('players.edit');
-            Route::post('update', 'update')->name('players.update');
-            Route::post('destroy/{id}', 'destroy')->name('players.destroy');
         }
     );
 
@@ -399,11 +355,11 @@ Route::controller(DynamicController::class)
     ->prefix('dynamics')
     ->group(
         function () {
-            Route::get('businesses-operations-by-franchise/{withTrashed?}', 'getBusinessesOperationsByFranchise')->name('dynamics.businesses-operations-by-franchise');
+            Route::get('businesses-operations-by-franchise/{with_trashed?}', 'getBusinessesOperationsByFranchise')->name('dynamics.businesses-operations-by-franchise');
             Route::get('operations-managers-by-franchise', 'getOperationsManagersByFranchise')->name('dynamics.operations-managers-by-franchise');
-            Route::get('operations-managers-by-business-operation/{withTrashed?}', 'getOperationsManagersByBusinessOperation')->name('dynamics.operations-managers-by-business-operation');
-            Route::get('regions-by-operations-manager/{withTrashed?}', 'getRegionsByOperationsManager')->name('dynamics.regions-by-operations-manager');
-            Route::get('sale-points-by-region/{withTrashed?}', 'getSalePointsByRegion')->name('dynamics.sale-points-by-region');
-            Route::get('sale-point-by-sale-point/{withTrashed?}', 'getSalePointBySalePoint')->name('dynamics.sale-point-by-sale-point');
+            Route::get('operations-managers-by-business-operation/{with_trashed?}', 'getOperationsManagersByBusinessOperation')->name('dynamics.operations-managers-by-business-operation');
+            Route::get('regions-by-operations-manager/{with_trashed?}', 'getRegionsByOperationsManager')->name('dynamics.regions-by-operations-manager');
+            Route::get('points-by-region/{with_trashed?}', 'getPointsByRegion')->name('dynamics.points-by-region');
+            Route::get('point-by-point/{with_trashed?}', 'getPointByPoint')->name('dynamics.point-by-point');
         }
     );

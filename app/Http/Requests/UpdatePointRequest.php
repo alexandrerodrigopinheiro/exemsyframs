@@ -25,4 +25,14 @@ class UpdatePointRequest extends FormRequest
             //
         ];
     }
+
+    /**
+     * Get custom messages for validator errors.
+     */
+    public function messages(): array
+    {
+        return [
+            //
+        ];
+    }
 }

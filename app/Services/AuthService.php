@@ -16,6 +16,9 @@ use Illuminate\Support\Str;
  */
 class AuthService
 {
+    /**
+     * Check login authentication
+     */
     public function login(Request $request): string|array
     {
         $data = [];
@@ -54,6 +57,9 @@ class AuthService
         return $data;
     }
 
+    /**
+     * Refresh token.
+     */
     public static function refresh(): string|array
     {
         $data = [];
@@ -84,6 +90,9 @@ class AuthService
         return $data;
     }
 
+    /**
+     * Recovered the specified remember token.
+     */
     public function recover(string $remember_token): string|array
     {
         $data = [];
@@ -113,6 +122,9 @@ class AuthService
         return $data;
     }
 
+    /**
+     * Store a forgot password token.
+     */
     public function forgotStore(Request $request): ?string
     {
         try {
@@ -148,6 +160,9 @@ class AuthService
         return null;
     }
 
+    /**
+     * Store a recover forgot.
+     */
     public function recoverStore(Request $request): string|array
     {
         $data = [];
@@ -182,6 +197,9 @@ class AuthService
         return $data;
     }
 
+    /**
+     * Logout session.
+     */
     public function logout(): ?string
     {
         try {

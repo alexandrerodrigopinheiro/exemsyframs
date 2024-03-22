@@ -6,6 +6,8 @@ use App\Http\Requests\AuthRequest;
 use App\Http\Requests\ForgotStoreRequest;
 use App\Http\Requests\RecoverStoreRequest;
 use App\Services\AuthService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +16,7 @@ class AuthController extends Controller
     /**
      * Display the form.
      */
-    public function index()
+    public function index(): Factory|RedirectResponse
     {
         if (Auth::check()) {
             return redirect()
@@ -25,9 +27,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Display the form.
+     * Check login authentication.
      */
-    public function login(AuthRequest $request)
+    public function login(AuthRequest $request): Factory|RedirectResponse
     {
         $auth_service = new AuthService();
 
@@ -46,7 +48,7 @@ class AuthController extends Controller
     /**
      * Display the forgot password.
      */
-    public function forgot()
+    public function forgot(): Factory
     {
         return view('auth.forgot');
     }
@@ -54,7 +56,7 @@ class AuthController extends Controller
     /**
      * Refresh token.
      */
-    public function refresh()
+    public function refresh(): Factory|RedirectResponse
     {
         $auth_service = new AuthService();
 
@@ -73,7 +75,7 @@ class AuthController extends Controller
     /**
      * Recovered the specified remember token.
      */
-    public function recover(string $remember_token)
+    public function recover(string $remember_token): Factory|RedirectResponse
     {
         $auth_service = new AuthService();
 
@@ -91,7 +93,7 @@ class AuthController extends Controller
     /**
      * Store a forgot password token.
      */
-    public function forgotStore(ForgotStoreRequest $request)
+    public function forgotStore(ForgotStoreRequest $request): Factory|RedirectResponse
     {
         $auth_service = new AuthService();
 
@@ -111,7 +113,7 @@ class AuthController extends Controller
     /**
      * Store a recover forgot.
      */
-    public function recoverStore(RecoverStoreRequest $request)
+    public function recoverStore(RecoverStoreRequest $request): Factory|RedirectResponse
     {
         $auth_service = new AuthService();
 
@@ -131,7 +133,7 @@ class AuthController extends Controller
     /**
      * Logout session.
      */
-    public function logout(Request $request)
+    public function logout(Request $request): Factory|RedirectResponse
     {
         $auth_service = new AuthService();
 
